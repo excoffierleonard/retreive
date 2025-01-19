@@ -1,0 +1,21 @@
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    container_name: mega-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - mega-db:/var/lib/mysql
+    networks:
+      - mega
+
+volumes:
+  mega-db:
+    name: mega-db
+
+networks:
+  mega:
+    name: mega

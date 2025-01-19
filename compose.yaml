@@ -1,4 +1,21 @@
 services:
+  app:
+    image: ghcr.io/excoffierleonard/wiki-retreive
+    container_name: mega-app
+    build:
+      context: .
+      dockerfile: dockerfile
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgres://postgres:postgres@db:5432/postgres}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+    ports:
+      - "${APP_PORT:-8080}:8080"
+    networks:
+      - mega
+
   db:
     image: pgvector/pgvector:pg17
     container_name: mega-db

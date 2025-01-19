@@ -60,6 +60,12 @@ impl From<sqlx::Error> for ApiError {
     }
 }
 
+impl From<reqwest::Error> for ApiError {
+    fn from(err: reqwest::Error) -> Self {
+        ApiError::InvalidInput(err.to_string())
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

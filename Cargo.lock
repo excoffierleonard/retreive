@@ -1780,6 +1780,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "retreive"
+version = "0.1.0"
+dependencies = [
+ "actix-web",
+ "dotenv",
+ "env_logger",
+ "num_cpus",
+ "reqwest",
+ "serde",
+ "sqlx",
+]
+
+[[package]]
 name = "ring"
 version = "0.17.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2743,19 +2756,6 @@ checksum = "372d5b87f58ec45c384ba03563b03544dc5fadc3983e434b286913f5b4a9bb6d"
 dependencies = [
  "redox_syscall",
  "wasite",
-]
-
-[[package]]
-name = "wiki-retreive"
-version = "0.1.0"
-dependencies = [
- "actix-web",
- "dotenv",
- "env_logger",
- "num_cpus",
- "reqwest",
- "serde",
- "sqlx",
 ]
 
 [[package]]

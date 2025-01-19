@@ -39,8 +39,8 @@ ENV OPENAI_API_KEY=""
 
 WORKDIR /app
 
-COPY --from=builder /app/target/x86_64-unknown-linux-musl/release/wiki-retreive .
+COPY --from=builder /app/target/x86_64-unknown-linux-musl/release/retreive .
 
 EXPOSE 8080
 
-CMD ["./wiki-retreive"]
+CMD ["./retreive"]

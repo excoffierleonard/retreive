@@ -1,5 +1,5 @@
 [package]
-name = "wiki-retreive"
+name = "retreive"
 version = "0.1.0"
 edition = "2021"
 

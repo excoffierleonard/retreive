@@ -1,7 +1,7 @@
 services:
   app:
-    image: ghcr.io/excoffierleonard/wiki-retreive
-    container_name: mega-app
+    image: ghcr.io/excoffierleonard/retreive
+    container_name: retreive-app
     build:
       context: .
       dockerfile: dockerfile
@@ -14,25 +14,25 @@ services:
     ports:
       - "${APP_PORT:-8080}:8080"
     networks:
-      - mega
+      - retreive
 
   db:
     image: pgvector/pgvector:pg17
-    container_name: mega-db
+    container_name: retreive-db
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
     ports:
       - "${DB_PORT:-5432}:5432"
     volumes:
-      - mega-db:/var/lib/mysql
+      - retreive-db:/var/lib/mysql
     networks:
-      - mega
+      - retreive
 
 volumes:
-  mega-db:
-    name: mega-db
+  retreive-db:
+    name: retreive-db
 
 networks:
-  mega:
-    name: mega
+  retreive:
+    name: retreive

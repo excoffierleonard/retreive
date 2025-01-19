@@ -4,8 +4,8 @@ use actix_web::{
     App, HttpServer,
 };
 use env_logger::{init_from_env, Env};
+use retreive::{config::Config, db::DbPool, routes::v1_routes};
 use std::io::{Error, ErrorKind, Result};
-use wiki_retreive::{config::Config, db::DbPool, routes::v1_routes};
 
 #[actix_web::main]
 async fn main() -> Result<()> {

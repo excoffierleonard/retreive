@@ -4,7 +4,7 @@ use actix_web::{
     App, HttpServer,
 };
 use env_logger::{init_from_env, Env};
-use retreive::{config::Config, db::DbPool, routes::v1_routes};
+use retrieve::{config::Config, db::DbPool, routes::v1_routes};
 use std::io::{Error, ErrorKind, Result};
 
 #[actix_web::main]

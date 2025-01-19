@@ -1,7 +1,7 @@
 services:
   app:
-    image: ghcr.io/excoffierleonard/retreive
-    container_name: retreive-app
+    image: ghcr.io/excoffierleonard/retrieve
+    container_name: retrieve-app
     build:
       context: .
       dockerfile: dockerfile
@@ -14,25 +14,25 @@ services:
     ports:
       - "${APP_PORT:-8080}:8080"
     networks:
-      - retreive
+      - retrieve
 
   db:
     image: pgvector/pgvector:pg17
-    container_name: retreive-db
+    container_name: retrieve-db
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
     ports:
       - "${DB_PORT:-5432}:5432"
     volumes:
-      - retreive-db:/var/lib/mysql
+      - retrieve-db:/var/lib/mysql
     networks:
-      - retreive
+      - retrieve
 
 volumes:
-  retreive-db:
-    name: retreive-db
+  retrieve-db:
+    name: retrieve-db
 
 networks:
-  retreive:
-    name: retreive
+  retrieve:
+    name: retrieve

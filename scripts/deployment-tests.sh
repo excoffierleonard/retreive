@@ -1,8 +1,8 @@
 # Input texts
-curl --request POST \           
-    --url "http://localhost:8080/v1/input" \
-    --header "Content-Type: application/json" \
-    --data '{
+curl --request POST \
+     --url "http://localhost:8080/v1/input" \
+     --header "Content-Type: application/json" \
+     --data '{
         "texts": ["Hello, World!", "Goodbye, World!"]
      }'
 

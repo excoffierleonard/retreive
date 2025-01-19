@@ -7,7 +7,7 @@ use actix_web::{
 use dotenv::dotenv;
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
-use sqlx::query;
+use sqlx::query_as;
 use std::env::var;
 
 #[derive(Debug, Deserialize)]
@@ -43,7 +43,7 @@ async fn fetch_similar(
 
     let embedding_request_body = EmbeddingRequestBody {
         model: "text-embedding-3-large".to_string(),
-        texts: vec![request_body.text],
+        texts: vec![request_body.text.clone()],
     };
 
     let embedding_response_body: EmbeddingResponseBody = Client::new()
@@ -56,7 +56,7 @@ async fn fetch_similar(
         .json()
         .await?;
 
-    let most_similar_texts = query(
+    let most_similar_texts = query_as(
         "
         SELECT text
         FROM main
@@ -64,12 +64,12 @@ async fn fetch_similar(
         LIMIT $2;
         ",
     )
-    .bind(embedding_response_body.embeddings[0])
+    .bind(&embedding_response_body.embeddings[0])
     .bind(request_body.top_k)
     .fetch_all(pool.get_pool())
     .await?;
 
     Ok(HttpResponse::Ok().json(ResponseBody {
-        texts: most_similar_texts,
+        texts: most_similar_texts.into_iter().map(|(text,)| text).collect(),
     }))
 }
